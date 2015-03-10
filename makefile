@@ -11,23 +11,24 @@ cleanup:
 build:libtiger.so
 
 libtiger.so:add.o sub.o
-				gcc -shared -o libtiger.so add.o sub.o
+				gcc -shared -o ./lib/libtiger.so ./src/add.o ./src/sub.o
+				rm -rf ./src/add.o ./src/sub.o
 				
-add.o:add.c
-				gcc -fpic -c add.c
+add.o:
+				gcc -fpic -o ./src/add.o -c ./src/add.c
 				
-sub.o:sub.c
-				gcc -fpic -c sub.c
+sub.o:
+				gcc -fpic -o ./src/sub.o -c ./src/sub.c
 				
 test:main
 
-main:main.c
-			gcc -o main main.c -L. -ltiger
+main:
+			gcc -o ./bin/main ./src/main.c -L./lib -ltiger -I.
 			
 install:
-			cp libtiger.so /lib/libtiger.so
+			cp ./lib/libtiger.so /lib/libtiger.so
 			
 clean:
 			rm -rf /lib/libtiger.so
-			rm -rf add.o sub.o libtiger.so main
+			rm -rf ./src/add.o ./src/sub.o ./lib/libtiger.so ./bin/main
 			

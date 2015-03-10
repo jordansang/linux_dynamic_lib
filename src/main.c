@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "tiger.h"
+#include "include/tiger.h"
 
 int main(int argv, char* argc[]) {
 	printf("sum=%d\n", add(5, 3));
